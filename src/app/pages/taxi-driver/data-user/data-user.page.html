@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Información del Conductor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Contenedor de la Presentación del Conductor -->
+  <div class="driver-container">
+
+    <!-- Imagen del Conductor -->
+    <ion-avatar class="driver-avatar">
+      <img src="assets/pics/conductor.png" alt="Conductor">
+    </ion-avatar>
+
+    <!-- Información del Conductor -->
+    <ion-card class="driver-info-card">
+      <ion-card-header>
+        <ion-card-title>Carlos Raba</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>
+              <strong>Cédula:</strong> 123456789
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <strong>Dirección:</strong> Calle 123 #45-67, Ciudad
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <strong>Empresa:</strong> TaxiExpress S.A.
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <strong>Correo Electrónico:</strong> {{ email }}
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <strong>Teléfono:</strong> +57 300 1234567
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <strong>Licencia:</strong> ABC12345
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <strong>Categoría:</strong> B1
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <strong>Fecha de Vencimiento:</strong> 25/08/2025
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botón para Editar Información -->
+    <ion-button expand="block" color="secondary" (click)="editarInformacion()">
+      Editar Información
+    </ion-button>
+
+  </div>
+
+</ion-content>

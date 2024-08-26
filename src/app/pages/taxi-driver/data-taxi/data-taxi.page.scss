@@ -1,0 +1,52 @@
+.taxi-container {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+ion-img {
+  width: 200px;
+  height: auto;
+  margin: 20px 0;
+}
+
+.license-plate {
+  display: inline-block;
+  background-color: #FFD700; /* Color de fondo amarillo */
+  border: 2px solid black; /* Borde negro */
+  color: black;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 32px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.taxi-info-card {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+ion-list {
+  margin: 0;
+  padding: 0;
+}
+
+ion-item {
+  --padding-start: 0;
+}
+
+ion-label {
+  font-size: 16px;
+}
+
+ion-content {
+  --overflow: hidden;
+  overflow: hidden;
+}

@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>barcode</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button (click)="scanCode()">Scan QR Code</ion-button>
+
+  <div *ngIf="scannedData">
+    <h2>QR Data:</h2>
+    <p>{{ scannedData }}</p>
+  </div>
+
+  <ion-button (click)="stopScan()" color="danger" *ngIf="scannedData">Stop Scan</ion-button>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">barcode</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>

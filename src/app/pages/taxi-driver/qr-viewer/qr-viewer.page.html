@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Código QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="qr-container">
+    <h2>Escanee el Código QR del Conductor</h2>
+
+    <qrcode [qrdata]="cedula" [scale]="12" [errorCorrectionLevel]="'M'"></qrcode>
+
+  </div>
+</ion-content>
