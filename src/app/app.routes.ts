@@ -25,5 +25,9 @@ export const routes: Routes = [
   {
     path: 'qr-viewer',
     loadComponent: () => import('./pages/taxi-driver/qr-viewer/qr-viewer.page').then(m => m.QrViewerPage)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.page').then(m => m.LoginPage)
   }
 ];
