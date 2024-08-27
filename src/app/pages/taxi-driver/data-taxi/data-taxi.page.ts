@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { TaxistaService } from 'src/app/services/taxista.service';
 
 @Component({
   selector: 'app-data-taxi',
@@ -12,9 +13,15 @@ import { IonicModule } from '@ionic/angular';
 })
 export class DataTaxiPage implements OnInit {
 
-  constructor() { }
+  taxistaService: TaxistaService = inject(TaxistaService);
+
+  nombreTaxi: string = '';
 
   ngOnInit() {
+    console.log('DataTaxiPage');
+
+    this.taxistaService.datosTaxista().subscribe(e => this.nombreTaxi = e[0].primer_nombre);
+
   }
 
 }
