@@ -1,9 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { IonContent,IonInput, IonHeader, IonLabel, IonTitle, IonToolbar, IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItemDivider, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonInput,
+  IonItemDivider,
+  IonLabel,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { logoGoogle, lockClosed, eye, eyeOff, at } from 'ionicons/icons'
+import { at, eye, eyeOff, lockClosed, logoGoogle } from 'ionicons/icons';
+import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -30,51 +57,81 @@ import { logoGoogle, lockClosed, eye, eyeOff, at } from 'ionicons/icons'
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    IonGrid]
+    IonGrid,
+  ],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
+  @ViewChild('contrasenaInput') contrasenaInput!: IonInput;
+  @Output() loginSuccess = new EventEmitter<void>();
 
+  toast = Swal.mixin({
+    toast: true,
+    position: 'bottom',
+    showConfirmButton: false,
+    timer: 4000,
+  });
 
   formSingIn!: FormGroup;
-  //Variables
   verMostrarContrasena: boolean = false;
   realizandoPeticion: boolean = false;
-  @ViewChild('contrasenaInput') contrasenaInput!: IonInput;
 
-  constructor() {
-
+  constructor(private authService: AuthService, private router: Router) {
     addIcons({ logoGoogle, lockClosed, eye, eyeOff, at });
     this.formSingIn = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.pattern('^.{7,}$')])
+      usuario: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
     });
+    this.validarRol();
   }
 
-  ngOnInit() {
+  async iniciarSesion() {
+    if (
+      await this.authService.login(
+        this.usuarioControl.getRawValue(),
+        this.passwordControl.getRawValue()
+      )
+    ) {
+      this.validarRol();
+    } else {
+      this.toast.fire({
+        text: 'Usuario o contraseña incorrectos',
+        icon: 'error',
+      });
+    }
   }
 
-  iniciarSesion(){
-
+  validarRol() {
+    if (this.authService.getUserRole() === 'TAXI') {
+      this.loginSuccess.emit();
+      this.router.navigate(['/data-taxi']);
+    } else if (this.authService.getUserRole() === 'ESTACION') {
+      this.loginSuccess.emit();
+      this.router.navigate(['/barcode-scanner']);
+    }
   }
 
-
-  get emailControl(): FormControl {
-    return this.formSingIn.get('email') as FormControl;
+  get usuarioControl(): FormControl {
+    return this.formSingIn.get('usuario') as FormControl;
   }
 
-  get paswordControl(): FormControl {
+  get passwordControl(): FormControl {
     return this.formSingIn.get('password') as FormControl;
   }
 
-  
   mostrarContrasena() {
     this.verMostrarContrasena = !this.verMostrarContrasena;
-    this.contrasenaInput['elementRef'].nativeElement.type = this.verMostrarContrasena ? "text" : "password";
+    this.contrasenaInput['elementRef'].nativeElement.type = this
+      .verMostrarContrasena
+      ? 'text'
+      : 'password';
   }
 
-  reestablecerContrasena(){
+  reestablecerContrasena() {}
 
+  logout() {
+    this.authService.logout();
   }
-
-
 }

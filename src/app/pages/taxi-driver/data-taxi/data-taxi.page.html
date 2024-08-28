@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -7,41 +7,41 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="!loading; else loadingTemplate">
   <div class="taxi-container">
     <div class="license-plate">
-      {{nombreTaxi}}
+      {{taxi.placa}}
     </div>
 
     <ion-card class="taxi-info-card">
       <ion-card-header>
-        <ion-card-title>Taxi - Modelo 2023</ion-card-title>
+        <ion-card-title><strong> SUBSIDIO = </strong> {{ taxi.subsidio | currency}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-list>
           <ion-item>
             <ion-label>
-              <strong>Modelo:</strong> 2023
+              <strong>Modelo:</strong> {{taxi.modelo}}
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
-              <strong>Cilindraje:</strong> 1600 cc
+              <strong>Cilindraje:</strong> {{taxi.cilindraje}} cc
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
-              <strong>Vehículo:</strong> Toyota Supra
+              <strong>Vehículo:</strong> {{taxi.vehiculo}}
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
-              <strong>Marca:</strong> Toyota
+              <strong>Marca:</strong> {{taxi.marca}}
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
-              <strong>Número de VIN:</strong> 1HGBH41JXMN109186
+              <strong>Número de VIN:</strong> {{ taxi.vin }}
             </ion-label>
           </ion-item>
         </ion-list>
@@ -50,3 +50,10 @@
   </div>
 
 </ion-content>
+
+<ng-template #loadingTemplate>
+  <div class="loading-container">
+    <ion-spinner name="crescent" class="custom-spinner"></ion-spinner>
+    <p class="loading-text">Cargando, por favor espere...</p>
+  </div>
+</ng-template>

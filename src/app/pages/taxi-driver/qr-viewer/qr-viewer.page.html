@@ -7,11 +7,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="!loading; else loadingTemplate">
   <div class="qr-container">
-    <h2>Escanee el Código QR del Conductor</h2>
+    <h2>Escanee el Código QR del taxi</h2>
 
-    <qrcode [qrdata]="cedula" [scale]="12" [errorCorrectionLevel]="'M'"></qrcode>
+    <qrcode [qrdata]="placa" [scale]="12" [errorCorrectionLevel]="'M'"></qrcode>
 
   </div>
 </ion-content>
+
+<ng-template #loadingTemplate>
+  <div class="loading-container">
+    <ion-spinner name="crescent" class="custom-spinner"></ion-spinner>
+    <p class="loading-text">Cargando, por favor espere...</p>
+  </div>
+</ng-template>

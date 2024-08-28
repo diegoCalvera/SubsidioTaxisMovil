@@ -10,7 +10,7 @@
           </ion-card-header>
 
           <ion-card-content>
-            <form [formGroup]="formSingIn"  (ngSubmit)="iniciarSesion()">
+            <form [formGroup]="formSingIn" (ngSubmit)="iniciarSesion()">
               <br>
               <ion-row>
                 <ion-col>
@@ -19,51 +19,51 @@
                   </div>
                 </ion-col>
               </ion-row>
-            
+
               <ion-grid>
                 <ion-row>
                   <ion-col>
-                    <ion-input label="Correo" formControlName="email" label-placement="floating" fill="outline"
-                      [errorText]="emailControl.hasError('required') ? 'Campo Obligatorio' : ''"
-                      placeholder="Ingrese su correo">
-                      <ion-icon slot="start" name="at" aria-hidden="true"></ion-icon>
+                    <ion-input label="Usuario" formControlName="usuario" label-placement="floating" fill="outline"
+                      [errorText]="usuarioControl.hasError('required') ? 'Campo Obligatorio' : ''"
+                      placeholder="Ingrese su usuario">
+                      <ion-icon slot="start" name="person-outline" aria-hidden="true"></ion-icon>
                     </ion-input>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <ion-input #contrasenaInput label="Contraseña" formControlName="password" type="password" label-placement="floating" fill="outline"
-                    [errorText]="paswordControl.hasError('required') ? 'Campo Obligatorio' : paswordControl.hasError('pattern') ? 'La contraseña debe tener minimo 6 caracteres' : ''"
+                    <ion-input #contrasenaInput label="Contraseña" formControlName="password" type="password"
+                      label-placement="floating" fill="outline"
+                      [errorText]="passwordControl.hasError('required') ? 'Campo Obligatorio' : passwordControl.hasError('minLength') ? 'La contraseña debe tener minimo 4 caracteres' : ''"
                       placeholder="Ingrese su contraseña">
                       <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
                       <ion-button fill="clear" slot="end" aria-label="Show/hide" (click)="mostrarContrasena()">
                         @if (verMostrarContrasena) {
-                          <ion-icon slot="icon-only" name="eye" aria-hidden="true" ></ion-icon>
+                        <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
                         }@else {
-                          <ion-icon slot="icon-only" name="eye-off" aria-hidden="true"></ion-icon>
+                        <ion-icon slot="icon-only" name="eye-off" aria-hidden="true"></ion-icon>
                         }
-            
+
                       </ion-button>
                     </ion-input>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <ion-button expand="full" color="primary" [disabled]="!formSingIn.valid"  (click)="iniciarSesion()">
+                    <ion-button expand="full" color="primary" [disabled]="!formSingIn.valid" (click)="iniciarSesion()">
                       @if (!realizandoPeticion) {
-                        <ion-label>Iniciar Sesión</ion-label>
-                        } @else{
-                        <div class="spinnerBotones"></div>
-                        }
+                      <ion-label>Iniciar Sesión</ion-label>
+                      } @else{
+                      <div class="spinnerBotones"></div>
+                      }
                     </ion-button>
-                    <br>
-                    <div class="ion-text-end">
+                    <!-- <div class="ion-text-end">
                       <p (click)="reestablecerContrasena()" color="primary">Restablecer contraseña</p>
-                    </div>
+                    </div> -->
                   </ion-col>
                 </ion-row>
-              <ion-item-divider></ion-item-divider>
-              <!--
+                <!-- <ion-item-divider></ion-item-divider> -->
+                <!--
                 <ion-row class="ion-justify-content-center">
                   <ion-col size="2">
                     <ion-icon name="logo-google" size="large" color="primary"></ion-icon>
@@ -71,10 +71,10 @@
                 </ion-row>
                 -->
               </ion-grid>
-            
+
               <br>
             </form>
-            
+
           </ion-card-content>
         </ion-card>
       </ion-col>

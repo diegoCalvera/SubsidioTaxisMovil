@@ -1,21 +1,31 @@
-<ion-app>
+<ion-app *ngIf="!login">
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header class="title">{{ title }}</ion-list-header>
-          <img class="icon-menu" src="./assets/icon/favicon.png" alt="">
+          <h5 class="title">{{title}}</h5>
+          <section class="icon-menu">
+            <img src="./assets/icon/favicon.png" alt="">
+          </section>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPagesDriver; let i = index">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of menuOptions; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
               routerLinkActive="selected">
               <ion-icon aria-hidden="true" slot="start" [ios]="p.icon" [md]="p.icon"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-button class="logout-btn" (click)="logout()" expand="block" fill="clear">
+            Cerrar Sesión
+          </ion-button>
         </ion-list>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
+</ion-app>
+<ion-app *ngIf="login">
+  <ion-content>
+    <app-login (loginSuccess)="onLoginSuccess()"></app-login>
+  </ion-content>
 </ion-app>

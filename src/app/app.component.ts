@@ -1,18 +1,63 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonRouterLink, IonRouterOutlet, IonSplitPane } from '@ionic/angular/standalone';
+import {
+  IonApp,
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonMenu,
+  IonMenuToggle,
+  IonNote,
+  IonRouterLink,
+  IonRouterOutlet,
+  IonSplitPane,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { archiveOutline, archiveSharp, bookmarkOutline, bookmarkSharp, carSportOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, personOutline, qrCodeOutline, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { carSportOutline, personOutline, qrCodeOutline } from 'ionicons/icons';
+import { LoginPage } from './pages/login/login.page';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterLink, IonRouterOutlet],
+  imports: [
+    RouterLink,
+    IonToolbar,
+    IonTitle,
+    IonButton,
+    RouterLinkActive,
+    CommonModule,
+    IonApp,
+    IonSplitPane,
+    IonMenu,
+    IonContent,
+    IonList,
+    IonListHeader,
+    IonNote,
+    IonMenuToggle,
+    IonItem,
+    IonIcon,
+    IonLabel,
+    IonRouterLink,
+    IonRouterOutlet,
+    LoginPage,
+    IonContent,
+  ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  userRole: string | null = null;
+  login: boolean = true;
+  menuOptions: any[] = [];
+
   public appPagesDriver = [
     { title: 'Datos De Vehículo', url: 'data-taxi', icon: 'car-sport-outline' },
     { title: 'Datos De Conductor', url: 'data-user', icon: 'person-outline' },
@@ -20,16 +65,38 @@ export class AppComponent {
   ];
 
   public appPagesStation = [
-    { title: 'Lector QR', url: '/pages/Lector QR', icon: 'mail' },
-    { title: 'Outbox', url: '/pages/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/pages/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/pages/archived', icon: 'archive' },
-    { title: 'Trash', url: '/pages/trash', icon: 'trash' },
-    { title: 'Spam', url: '/pages/spam', icon: 'warning' },
+    { title: 'Lector QR', url: 'barcode-scanner', icon: 'qr-code-outline' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {
-    addIcons({ mailOutline, personOutline, carSportOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp, qrCodeOutline });
+
+  constructor(private authService: AuthService) {
+    addIcons({ personOutline, carSportOutline, qrCodeOutline });
+  }
+
+  ngOnInit() {
+    this.setMenuOptions();
+  }
+
+  setMenuOptions() {
+    this.userRole = this.authService.getUserRole();
+    if (this.userRole == null || this.userRole == '') {
+      this.login = true;
+    } else {
+      if (this.userRole == 'TAXI') {
+        this.menuOptions = this.appPagesDriver;
+      } else if (this.userRole == 'ESTACION') {
+        this.menuOptions = this.appPagesStation;
+      }
+      this.login = false;
+    }
+  }
+
+  onLoginSuccess() {
+    this.setMenuOptions();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.setMenuOptions();
   }
 
   title = 'Subsidio Taxis';

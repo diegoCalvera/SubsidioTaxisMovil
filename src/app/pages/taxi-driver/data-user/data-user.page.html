@@ -7,11 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="!loading; else loadingTemplate">
 
   <!-- Contenedor de la Presentación del Conductor -->
   <div class="driver-container">
-
     <!-- Imagen del Conductor -->
     <ion-avatar class="driver-avatar">
       <img src="assets/pics/conductor.png" alt="Conductor">
@@ -20,60 +19,45 @@
     <!-- Información del Conductor -->
     <ion-card class="driver-info-card">
       <ion-card-header>
-        <ion-card-title>Carlos Raba</ion-card-title>
+        <ion-card-title>{{ usuario.nombre }} {{ usuario.apellido }}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
         <ion-list>
           <ion-item>
             <ion-label>
-              <strong>Cédula:</strong> 123456789
+              <strong>Cédula:</strong> {{ usuario.cedula }}
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
-              <strong>Dirección:</strong> Calle 123 #45-67, Ciudad
+              <strong>Dirección:</strong> {{ usuario.direccion}}
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
-              <strong>Empresa:</strong> TaxiExpress S.A.
+              <strong>Empresa:</strong> {{ usuario.empresa }}
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
-              <strong>Correo Electrónico:</strong> {{ email }}
+              <strong>Correo Electrónico:</strong> {{ usuario.correo }}
             </ion-label>
           </ion-item>
           <ion-item>
             <ion-label>
-              <strong>Teléfono:</strong> +57 300 1234567
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <strong>Licencia:</strong> ABC12345
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <strong>Categoría:</strong> B1
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <strong>Fecha de Vencimiento:</strong> 25/08/2025
+              <strong>Teléfono:</strong> {{ usuario.celular}}
             </ion-label>
           </ion-item>
         </ion-list>
       </ion-card-content>
     </ion-card>
-
-    <!-- Botón para Editar Información -->
-    <ion-button expand="block" color="secondary" (click)="editarInformacion()">
-      Editar Información
-    </ion-button>
-
   </div>
-
 </ion-content>
+
+<ng-template #loadingTemplate>
+  <div class="loading-container">
+    <ion-spinner name="crescent" class="custom-spinner"></ion-spinner>
+    <p class="loading-text">Cargando, por favor espere...</p>
+  </div>
+</ng-template>

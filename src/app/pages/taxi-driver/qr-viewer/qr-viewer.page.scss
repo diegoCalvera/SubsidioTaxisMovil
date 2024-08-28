@@ -10,3 +10,25 @@
     margin-bottom: 20px;
   }
   
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
+  
+  .custom-spinner {
+    --spinner-color: #725a17; /* Cambia esto al color que prefieras */
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+  }
+  
+  .loading-text {
+    font-size: 16px;
+    color: #725a17; /* Usa el mismo color o uno que combine */
+    margin-top: 10px;
+  }
+  
