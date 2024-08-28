@@ -21,7 +21,7 @@
 
 .scan-button,
 .stop-button {
-  --background: #725a17; /* Cambia este color si lo deseas */
+  --background: #3880ff; /* Cambia este color si lo deseas */
   --border-radius: 10px;
   --box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   font-size: 18px;
@@ -44,7 +44,7 @@
 
 .result-container h2 {
   font-size: 22px;
-  color: #725a17;
+  color: #3880ff;
   margin-bottom: 10px;
 }
 
@@ -52,4 +52,19 @@
   font-size: 16px;
   color: #666;
   word-wrap: break-word;
+}
+
+.license-plate {
+  margin-top: 2rem;
+  display: inline-block;
+  background-color: #ffd700; /* Color de fondo amarillo */
+  border: 2px solid black; /* Borde negro */
+  color: black;
+  font-family: "Arial Black", sans-serif;
+  font-size: 32px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
 }

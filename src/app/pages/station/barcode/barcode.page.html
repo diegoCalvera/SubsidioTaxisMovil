@@ -19,6 +19,9 @@
   </ion-button>
   <div *ngIf="datosTaxi" class="result-container">
     <ion-card class="taxi-info-card">
+      <div class="license-plate">
+        {{taxi.placa}}
+      </div>
       <ion-card-header>
         <ion-card-title><strong> SUBSIDIO = </strong> {{ taxi.subsidio | currency}}</ion-card-title>
       </ion-card-header>
@@ -26,32 +29,12 @@
         <ion-list>
           <ion-item>
             <ion-label>
-              <strong>Modelo:</strong> {{taxi.modelo}}
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <strong>Cilindraje:</strong> {{taxi.cilindraje}} cc
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <strong>Vehículo:</strong> {{taxi.vehiculo}}
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <strong>Marca:</strong> {{taxi.marca}}
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <strong>Número de VIN:</strong> {{ taxi.vin }}
+              <strong>Vehículo:</strong> {{taxi.marca}} - {{taxi.vehiculo}}
             </ion-label>
           </ion-item>
         </ion-list>
       </ion-card-content>
-      <ion-button expand="block" (click)="openModal()">Aceptar Vehiculo</ion-button>
+      <ion-button class="scan-button" expand="block" (click)="openModal()">Aceptar Vehiculo</ion-button>
       <p>{{ message }}</p>
     </ion-card>
   </div>

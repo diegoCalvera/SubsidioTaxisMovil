@@ -18,6 +18,7 @@ import {
   IonTitle,
   IonToolbar,
   ModalController,
+  Platform,
 } from '@ionic/angular/standalone';
 import { Taxi } from 'src/app/model/taxi';
 import { DatabaseService } from 'src/app/services/database.service';
@@ -55,20 +56,22 @@ export class BarcodePage {
   message = 'Boton para aceptar vehiculo';
 
   constructor(
+    private platform: Platform,
     private databaseService: DatabaseService,
     private modalCtrl: ModalController
-  ) {}
+  ) {
+    this.platform.ready().then(() => {
+      this.checkPermission();
+    });
+  }
 
   async checkPermission() {
     const status = await BarcodeScanner.checkPermission({ force: true });
     if (status.granted) {
-      return true;
+      console.log('Permiso concedido');
+    } else {
+      console.log('Permiso no concedido');
     }
-    if (status.denied) {
-      alert('Por favor habilite los permisos de la camara en ajustes.');
-      return false;
-    }
-    return false;
   }
 
   async startScan() {
@@ -77,10 +80,6 @@ export class BarcodePage {
     }
 
     this.isScanning = true;
-    const allowed = await this.checkPermission();
-    if (!allowed) {
-      return;
-    }
 
     BarcodeScanner.hideBackground();
     document.body.classList.add('scanner-active');
