@@ -98,6 +98,9 @@ export class BarcodePage {
     BarcodeScanner.hideBackground();
     document.body.classList.add('scanner-active');
 
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    document.body.classList.add('scanner-active');
     const result = await BarcodeScanner.startScan();
 
     if (result.hasContent) {
@@ -186,7 +189,7 @@ export class BarcodePage {
     };
     this.databaseService.createTransaccion(transaccion).then(() => {
       this.toast.fire({
-        text: 'Recarga cancelada',
+        text: 'Vehiculo rechazado',
         icon: 'info',
       });
       this.datosTaxi = false;
