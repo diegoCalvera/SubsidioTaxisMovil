@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  addDoc,
   collection,
   collectionData,
   CollectionReference,
@@ -16,6 +17,7 @@ import { FIRESTORE_TABLES } from 'src/utils/enums/enums';
 import { Taxista } from '../model/taxista';
 import { Usuario } from '../model/usuario';
 import { Taxi } from '../model/taxi';
+import { Transacciones } from '../model/transacciones';
 
 @Injectable({
   providedIn: 'root',
@@ -24,11 +26,16 @@ export class DatabaseService {
   private taxistasRef: CollectionReference<DocumentData>;
   private usuariosRef: CollectionReference<DocumentData>;
   private taxiRef: CollectionReference<DocumentData>;
+  private transaccionRef: CollectionReference<DocumentData>;
 
   constructor(private firestore: Firestore) {
     this.taxistasRef = collection(this.firestore, FIRESTORE_TABLES.TAXISTA);
     this.usuariosRef = collection(this.firestore, FIRESTORE_TABLES.USUARIO);
     this.taxiRef = collection(this.firestore, FIRESTORE_TABLES.TAXI);
+    this.transaccionRef = collection(
+      this.firestore,
+      FIRESTORE_TABLES.TRANSACCIONES
+    );
   }
 
   loginUsuario(usuario: string, contrasena: string): Observable<Usuario[]> {
@@ -71,13 +78,27 @@ export class DatabaseService {
   }
 
   updateTaxista(contactoEmergencia: Taxista) {
-    const refContactoEmergencia = doc(
+    const taxiC = doc(
       this.firestore,
       FIRESTORE_TABLES.TAXISTA,
       contactoEmergencia.id
     );
-    return updateDoc(refContactoEmergencia, {
+    return updateDoc(taxiC, {
       ...contactoEmergencia,
     });
+  }
+
+  updateTaxi(taxi: Taxi) {
+    const taxiC = doc(this.firestore, FIRESTORE_TABLES.TAXI, taxi.id);
+    return updateDoc(taxiC, {
+      ...taxi,
+    });
+  }
+
+  createTransaccion(transaccion: Transacciones) {
+    return addDoc(
+      collection(this.firestore, FIRESTORE_TABLES.TRANSACCIONES),
+      transaccion
+    );
   }
 }

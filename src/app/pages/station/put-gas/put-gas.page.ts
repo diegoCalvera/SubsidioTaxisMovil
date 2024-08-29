@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   IonButton,
   IonButtons,
@@ -10,6 +16,8 @@ import {
   IonTitle,
   IonToolbar,
   ModalController,
+  NavParams,
+  IonInput,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -25,20 +33,42 @@ import {
     IonToolbar,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonButtons,
     IonItem,
+    IonInput,
   ],
 })
 export class PutGasPage {
-  name!: string;
+  formTanqueo!: FormGroup;
+  vehicleInfo: any;
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private navParams: NavParams
+  ) {
+    this.vehicleInfo = this.navParams.get('vehicleInfo');
+  }
+
+  ngOnInit() {
+    this.construirFormulario();
+  }
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
   confirm() {
-    return this.modalCtrl.dismiss(this.name, 'confirm');
+    return this.modalCtrl.dismiss(this.valorControl.value, 'confirm');
+  }
+
+  construirFormulario() {
+    this.formTanqueo = new FormGroup({
+      valor: new FormControl('', [Validators.required]),
+    });
+  }
+
+  get valorControl(): FormControl {
+    return this.formTanqueo.get('valor') as FormControl;
   }
 }

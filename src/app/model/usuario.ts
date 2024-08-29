@@ -5,4 +5,5 @@ export interface Usuario {
   rol: string;
   placa: string;
   activo: boolean;
+  nombre_estacion?: string;
 }

@@ -13,10 +13,6 @@
   </div>
 
   <ion-button expand="block" (click)="startScan()" class="scan-button">Escanear</ion-button>
-
-  <ion-button expand="block" color="danger" (click)="stopScan()" class="stop-button" *ngIf="isScanning">
-    Detener Escaneo
-  </ion-button>
   <div *ngIf="datosTaxi" class="result-container">
     <ion-card class="taxi-info-card">
       <div class="license-plate">
@@ -35,7 +31,8 @@
         </ion-list>
       </ion-card-content>
       <ion-button class="scan-button" expand="block" (click)="openModal()">Aceptar Vehiculo</ion-button>
-      <p>{{ message }}</p>
+      <ion-button class="scan-button" expand="block" color="danger" (click)="presentAlert()">Rechazar
+        Vehiculo</ion-button>
     </ion-card>
   </div>
 

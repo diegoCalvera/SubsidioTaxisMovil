@@ -19,6 +19,7 @@ export class AuthService {
         this.userRole = user[0].rol;
         localStorage.setItem('userRole', user[0].rol);
         localStorage.setItem('placa', user[0].placa);
+        localStorage.setItem('estacion', user[0].nombre_estacion || '');
         return true;
       }
       return false;
@@ -32,6 +33,10 @@ export class AuthService {
     return this.userRole || localStorage.getItem('userRole');
   }
 
+  getEstacion(): string | null {
+    return localStorage.getItem('estacion');
+  }
+
   getPlaca(): string | null {
     return localStorage.getItem('placa');
   }
@@ -40,5 +45,6 @@ export class AuthService {
     this.userRole = null;
     localStorage.removeItem('userRole');
     localStorage.removeItem('placa');
+    localStorage.removeItem('estacion');
   }
 }
