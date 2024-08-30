@@ -193,7 +193,7 @@ export class BarcodePage {
     };
     this.databaseService.createTransaccion(transaccion).then(() => {
       this.toast.fire({
-        text: 'Recarga cancelada',
+        text: 'Vehiculo rechazado',
         icon: 'info',
       });
     });

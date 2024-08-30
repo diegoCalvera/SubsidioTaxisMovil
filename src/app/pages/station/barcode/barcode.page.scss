@@ -68,3 +68,14 @@
   letter-spacing: 2px;
   margin-bottom: 20px;
 }
+
+.scanner-active {
+  background: transparent !important;
+}
+
+body.scanner-active .content {
+  display: none;
+}
+body.scanner-active {
+  background-color: transparent;
+}
