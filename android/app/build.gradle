@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
+    buildFeatures {
+        dataBinding true
+    }
+    dataBinding {
+        enabled = true
+    }
     namespace "co.moviliza.subsidio.movil"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {

@@ -12,28 +12,45 @@
     <h5>Escanee el Código QR del taxista</h5>
   </div>
 
-  <ion-button expand="block" (click)="startScan()" class="scan-button">Escanear</ion-button>
-  <div *ngIf="datosTaxi" class="result-container">
+  <ion-button expand="block" (click)="scan()" [disabled]="!isSupported" class="scan-button">Escanear</ion-button>
+
+  @if(datosTaxi && !datosModificados){
+  <div class="result-container">
     <ion-card class="taxi-info-card">
       <div class="license-plate">
-        {{taxi.placa}}
+        {{taxi?.placa}}
       </div>
       <ion-card-header>
-        <ion-card-title><strong> SUBSIDIO = </strong> {{ taxi.subsidio | currency}}</ion-card-title>
+        <ion-card-title><strong> SUBSIDIO = </strong> {{ taxi?.subsidio | currency}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-list>
           <ion-item>
             <ion-label>
-              <strong>Vehículo:</strong> {{taxi.marca}} - {{taxi.vehiculo}}
+              <strong>Vehículo:</strong> {{taxi?.marca}} - {{taxi?.vehiculo}}
             </ion-label>
           </ion-item>
         </ion-list>
       </ion-card-content>
       <ion-button class="scan-button" expand="block" (click)="openModal()">Aceptar Vehiculo</ion-button>
-      <ion-button class="scan-button" expand="block" color="danger" (click)="presentAlert()">Rechazar
+      <ion-button class="scan-button" expand="block" (click)="rechazarVehiculo()" color="danger">Rechazar
         Vehiculo</ion-button>
     </ion-card>
   </div>
+  }
 
 </ion-content>
+<!--
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let barcode of barcodes">
+      <ion-label position="stacked">{{ barcode.format }}</ion-label>
+      <ion-input type="text" [value]="barcode.rawValue"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="scan()" [disabled]="!isSupported">
+      <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>-->
