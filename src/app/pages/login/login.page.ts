@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -86,6 +92,8 @@ export class LoginPage {
     });
     this.validarRol();
   }
+
+  imagenPerfilTamano = computed(() => '100');
 
   async iniciarSesion() {
     if (
