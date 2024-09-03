@@ -16,16 +16,16 @@ import {
   IonTitle,
   IonToolbar,
   ModalController,
+  IonLabel,
   NavParams,
-  IonInput,
-} from '@ionic/angular/standalone';
+  IonInput, IonCol, IonRow, IonGrid } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-put-gas',
   templateUrl: './put-gas.page.html',
   styleUrls: ['./put-gas.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonGrid, IonRow, IonCol, 
     IonContent,
     IonHeader,
     IonButton,
@@ -36,6 +36,7 @@ import {
     ReactiveFormsModule,
     IonButtons,
     IonItem,
+    IonLabel,
     IonInput,
   ],
 })

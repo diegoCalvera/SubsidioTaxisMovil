@@ -1,19 +1,26 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
     </ion-buttons>
     <ion-title>Confirmación de información</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+      <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <form [formGroup]="formTanqueo">
-    <ion-item>
-      <ion-input labelPlacement="stacked" label="Ingrese el valor a tanquear" formControlName="valor"
-        placeholder="Valor tanqueo" type="number"></ion-input>
-    </ion-item>
-  </form>
+  <br>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="formTanqueo">          
+            <ion-input label="Valor Tanqueo"  formControlName="valor"
+              placeholder="Valor tanqueo" type="number" label-placement="floating" fill="outline"></ion-input>
+          
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
 </ion-content>
