@@ -19,7 +19,11 @@ import {
   IonToolbar,
   ModalController,
   Platform,
-  AlertController, IonInput, IonFab, IonFabButton, IonIcon
+  AlertController,
+  IonInput,
+  IonFab,
+  IonFabButton,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { Taxi } from 'src/app/model/taxi';
 import { DatabaseService } from 'src/app/services/database.service';
@@ -34,7 +38,11 @@ import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
   templateUrl: './barcode.page.html',
   styleUrls: ['./barcode.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonFabButton, IonFab, IonInput,
+  imports: [
+    IonIcon,
+    IonFabButton,
+    IonFab,
+    IonInput,
     CommonModule,
     FormsModule,
     IonButtons,
@@ -55,14 +63,13 @@ import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
   ],
 })
 export class BarcodePage {
-
   isSupported = false;
   barcodes: Barcode[] = [];
 
   scannedResult: string | null = null;
   isScanning: boolean = false;
   datosTaxi: boolean = false;
-  datosModificados : boolean = false;
+  datosModificados: boolean = false;
   taxi?: Taxi | null;
   message = 'Boton para aceptar vehiculo';
 
@@ -85,7 +92,6 @@ export class BarcodePage {
     });
   }
 
-
   ngOnInit() {
     BarcodeScanner.isSupported().then((result) => {
       this.isSupported = result.supported;
@@ -107,17 +113,15 @@ export class BarcodePage {
       placa = barcodes[0].rawValue;
     }
 
-    this.databaseService
-      .getTaxi('placa', placa)
-      .subscribe((data) => {
-        if (data.length > 0) {
-          this.taxi = data[0];
-          this.datosTaxi = true;
-        } else {
-          alert('Taxi no encontrado');
-          this.datosTaxi = false;
-        }
-      });
+    this.databaseService.getTaxi('placa', placa).subscribe((data) => {
+      if (data.length > 0) {
+        this.taxi = data[0];
+        this.datosTaxi = true;
+      } else {
+        alert('Taxi no encontrado');
+        this.datosTaxi = false;
+      }
+    });
   }
 
   async requestPermissions(): Promise<boolean> {
@@ -128,7 +132,8 @@ export class BarcodePage {
   async presentAlert(): Promise<void> {
     const alert = await this.alertController.create({
       header: 'Permisos denegados',
-      message: 'Por favor acepta los permisos de cámara para realizar el escaner el código.',
+      message:
+        'Por favor acepta los permisos de cámara para realizar el escaner el código.',
       buttons: ['OK'],
     });
     await alert.present();
@@ -197,7 +202,7 @@ export class BarcodePage {
         icon: 'info',
       });
     });
-    this.datosTaxi =  false;
+    this.datosTaxi = false;
     this.datosModificados = false;
   }
 
@@ -225,5 +230,4 @@ export class BarcodePage {
 
     await alert.present();
   }
-
 }
