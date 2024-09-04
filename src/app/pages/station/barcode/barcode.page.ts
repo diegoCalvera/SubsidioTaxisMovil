@@ -62,9 +62,10 @@ export class BarcodePage {
   scannedResult: string | null = null;
   isScanning: boolean = false;
   datosTaxi: boolean = false;
-  datosModificados : boolean = false;
+  datosModificados: boolean = false;
   taxi?: Taxi | null;
   message = 'Boton para aceptar vehiculo';
+  realizandoPeticion: boolean = false;
 
   toast = Swal.mixin({
     toast: true,
@@ -93,6 +94,7 @@ export class BarcodePage {
   }
 
   async scan(): Promise<void> {
+    
     this.datosModificados = false;
     let placa = 'XXX333';
 
@@ -107,9 +109,11 @@ export class BarcodePage {
       placa = barcodes[0].rawValue;
     }
 
+    this.realizandoPeticion = true;
     this.databaseService
       .getTaxi('placa', placa)
       .subscribe((data) => {
+        this.realizandoPeticion = false;
         if (data.length > 0) {
           this.taxi = data[0];
           this.datosTaxi = true;
@@ -197,7 +201,7 @@ export class BarcodePage {
         icon: 'info',
       });
     });
-    this.datosTaxi =  false;
+    this.datosTaxi = false;
     this.datosModificados = false;
   }
 

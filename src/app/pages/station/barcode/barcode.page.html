@@ -12,9 +12,10 @@
     <h5>Escanee el Código QR del taxista</h5>
   </div>
 
-  <ion-button expand="block" (click)="scan()" [disabled]="!isSupported" class="scan-button">Escanear</ion-button>
+  <ion-button expand="block" (click)="scan()" [disabled]="isSupported" class="scan-button">Escanear</ion-button>
 
   @if(datosTaxi && !datosModificados){
+  @if(!realizandoPeticion){
   <div class="result-container">
     <ion-card class="taxi-info-card">
       <div class="license-plate">
@@ -37,6 +38,15 @@
         Vehiculo</ion-button>
     </ion-card>
   </div>
+  } @else {
+    Lino Alejandro
+  <div class="contenedor">
+    <div class="center">
+      <div class="custom-loader"></div>
+    </div>
+  </div>
+  }
+
   }
 
 </ion-content>
