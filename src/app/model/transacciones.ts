@@ -5,4 +5,5 @@ export interface Transacciones {
   timestamp: Date;
   tipo_transaccion: string;
   valor?: number;
+  visto?: boolean;
 }

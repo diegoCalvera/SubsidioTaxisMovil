@@ -32,7 +32,6 @@ import Swal from 'sweetalert2';
 import { Transacciones } from 'src/app/model/transacciones';
 import { AuthService } from 'src/app/services/auth.service';
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
-import { addIcons } from "ionicons";
 
 @Component({
   selector: 'app-barcode',
@@ -101,7 +100,6 @@ export class BarcodePage {
   }
 
   async scan(): Promise<void> {
-    
     this.datosModificados = false;
     let placa = 'XXX333';
 
@@ -117,18 +115,16 @@ export class BarcodePage {
     }
 
     this.realizandoPeticion = true;
-    this.databaseService
-      .getTaxi('placa', placa)
-      .subscribe((data) => {
-        this.realizandoPeticion = false;
-        if (data.length > 0) {
-          this.taxi = data[0];
-          this.datosTaxi = true;
-        } else {
-          alert('Taxi no encontrado');
-          this.datosTaxi = false;
-        }
-      });
+    this.databaseService.getTaxi('placa', placa).subscribe((data) => {
+      this.realizandoPeticion = false;
+      if (data.length > 0) {
+        this.taxi = data[0];
+        this.datosTaxi = true;
+      } else {
+        alert('Taxi no encontrado');
+        this.datosTaxi = false;
+      }
+    });
   }
 
   async requestPermissions(): Promise<boolean> {
@@ -201,6 +197,7 @@ export class BarcodePage {
       placa: this.taxi?.placa,
       timestamp: new Date(),
       tipo_transaccion: 'RECHAZO',
+      visto: false,
       valor: 0,
     };
     this.databaseService.createTransaccion(transaccion).then(() => {
