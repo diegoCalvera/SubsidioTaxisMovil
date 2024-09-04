@@ -79,3 +79,8 @@ body.scanner-active .content {
 body.scanner-active {
   background-color: transparent;
 }
+
+.result-container {
+  display: flex;
+  place-content: center;
+}

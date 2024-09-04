@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="qr-scanner-content">
+<ion-content class="qr-scanner-content ">
   <div class="header">
     <h5>Escanee el Código QR del taxista</h5>
   </div>
@@ -16,38 +16,42 @@
 
   @if(datosTaxi && !datosModificados){
   @if(!realizandoPeticion){
-  <div class="result-container">
-    <ion-card class="taxi-info-card">
-      <div class="license-plate">
-        {{taxi?.placa}}
+  <div class="contenedor">
+    <div class="center">
+      <div class="result-container">
+        <ion-card class="taxi-info-card">
+          <div class="license-plate">
+            {{taxi?.placa}}
+          </div>
+          <ion-card-header>
+            <ion-card-title><strong> SUBSIDIO = </strong> {{ taxi?.subsidio | currency}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label>
+                  <p>
+                    <strong>Vehículo:</strong> {{taxi?.marca}} - {{taxi?.vehiculo}}
+                  </p>
+                  <p>
+                    <strong>Modelo:</strong> {{taxi?.modelo}}
+                  </p>
+                  <p>
+                    <strong>Cilindraje:</strong> {{taxi?.cilindraje}}
+                  </p>
+                  <p>
+                    <strong>VIN:</strong> {{taxi?.vin}}
+                  </p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+          <ion-button class="scan-button" expand="block" (click)="openModal()">Aceptar Vehículo</ion-button>
+          <ion-button class="scan-button" expand="block" (click)="rechazarVehiculo()" color="danger">Rechazar
+            Vehículo</ion-button>
+        </ion-card>
       </div>
-      <ion-card-header>
-        <ion-card-title><strong> SUBSIDIO = </strong> {{ taxi?.subsidio | currency}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>
-              <p>
-                <strong>Vehículo:</strong> {{taxi?.marca}} - {{taxi?.vehiculo}}
-              </p>
-              <p>
-                <strong>Modelo:</strong> {{taxi?.modelo}}
-              </p>
-              <p>
-                <strong>Cilindraje:</strong> {{taxi?.cilindraje}}
-              </p>
-              <p>
-                <strong>VIN:</strong> {{taxi?.vin}}
-              </p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-      <ion-button class="scan-button" expand="block" (click)="openModal()">Aceptar Vehículo</ion-button>
-      <ion-button class="scan-button" expand="block" (click)="rechazarVehiculo()" color="danger">Rechazar
-        Vehículo</ion-button>
-    </ion-card>
+    </div>
   </div>
   } @else {
   <div class="contenedor">
