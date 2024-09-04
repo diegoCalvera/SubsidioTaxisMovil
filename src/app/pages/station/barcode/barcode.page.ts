@@ -19,7 +19,11 @@ import {
   IonToolbar,
   ModalController,
   Platform,
-  AlertController, IonInput, IonFab, IonFabButton, IonIcon
+  AlertController,
+  IonInput,
+  IonFab,
+  IonFabButton,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { Taxi } from 'src/app/model/taxi';
 import { DatabaseService } from 'src/app/services/database.service';
@@ -34,7 +38,11 @@ import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
   templateUrl: './barcode.page.html',
   styleUrls: ['./barcode.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonFabButton, IonFab, IonInput,
+  imports: [
+    IonIcon,
+    IonFabButton,
+    IonFab,
+    IonInput,
     CommonModule,
     FormsModule,
     IonButtons,
@@ -55,7 +63,6 @@ import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
   ],
 })
 export class BarcodePage {
-
   isSupported = false;
   barcodes: Barcode[] = [];
 
@@ -85,7 +92,6 @@ export class BarcodePage {
       //this.checkPermission();
     });
   }
-
 
   ngOnInit() {
     BarcodeScanner.isSupported().then((result) => {
@@ -132,7 +138,8 @@ export class BarcodePage {
   async presentAlert(): Promise<void> {
     const alert = await this.alertController.create({
       header: 'Permisos denegados',
-      message: 'Por favor acepta los permisos de cámara para realizar el escaner el código.',
+      message:
+        'Por favor acepta los permisos de cámara para realizar el escaner el código.',
       buttons: ['OK'],
     });
     await alert.present();
@@ -229,5 +236,4 @@ export class BarcodePage {
 
     await alert.present();
   }
-
 }

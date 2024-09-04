@@ -18,6 +18,7 @@ import { Taxista } from '../model/taxista';
 import { Usuario } from '../model/usuario';
 import { Taxi } from '../model/taxi';
 import { Transacciones } from '../model/transacciones';
+import { InfoTaxi } from '../model/info-taxi';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,7 @@ export class DatabaseService {
   private usuariosRef: CollectionReference<DocumentData>;
   private taxiRef: CollectionReference<DocumentData>;
   private transaccionRef: CollectionReference<DocumentData>;
+  private infoTaxiRef: CollectionReference<DocumentData>;
 
   constructor(private firestore: Firestore) {
     this.taxistasRef = collection(this.firestore, FIRESTORE_TABLES.TAXISTA);
@@ -36,6 +38,7 @@ export class DatabaseService {
       this.firestore,
       FIRESTORE_TABLES.TRANSACCIONES
     );
+    this.infoTaxiRef = collection(this.firestore, FIRESTORE_TABLES.INFO_TAXI);
   }
 
   loginUsuario(usuario: string, contrasena: string): Observable<Usuario[]> {
@@ -63,6 +66,11 @@ export class DatabaseService {
   getTaxi(campo: string, valor: any): Observable<Taxi[]> {
     const usuario = query(this.taxiRef, where(campo, '==', valor));
     return collectionData(usuario, { idField: 'id' }) as Observable<Taxi[]>;
+  }
+
+  getInfoTaxi(campo: string, valor: any): Observable<InfoTaxi[]> {
+    const usuario = query(this.infoTaxiRef, where(campo, '==', valor));
+    return collectionData(usuario, { idField: 'id' }) as Observable<InfoTaxi[]>;
   }
 
   getAllTaxistas(): Observable<Taxista[]> {
