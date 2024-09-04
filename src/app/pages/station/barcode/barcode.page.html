@@ -12,7 +12,7 @@
     <h5>Escanee el Código QR del taxista</h5>
   </div>
 
-  <ion-button expand="block" (click)="scan()" [disabled]="isSupported" class="scan-button">Escanear</ion-button>
+  <ion-button expand="block" (click)="scan()" [disabled]="!isSupported" class="scan-button">Escanear</ion-button>
 
   @if(datosTaxi && !datosModificados){
   @if(!realizandoPeticion){

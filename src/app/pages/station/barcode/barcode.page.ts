@@ -32,6 +32,7 @@ import Swal from 'sweetalert2';
 import { Transacciones } from 'src/app/model/transacciones';
 import { AuthService } from 'src/app/services/auth.service';
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { addIcons } from "ionicons";
 
 @Component({
   selector: 'app-barcode',
